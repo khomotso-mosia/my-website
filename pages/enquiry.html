@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enquiry & Booking - Noma's BeautyParlour</title>
+</head>
+<body>
+
+    <header>
+        <h1>Noma's BeautyParlour</h1>
+         <nav>
+            <a href="../index.html">Home</a> | 
+            <a href="./services.html">Services</a> | 
+            <a href="./about.html">About Us</a> | 
+            <a href="./enquiry.html">Enquiry</a> | 
+            <a href="./contact.html">Contact Us</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <h2>Booking & General Enquiry Form</h2>
+        <p>Please fill out the form below to request an appointment or ask a question.</p>
+
+        <!--Collect the user data -->
+        <form action="#" method="post">
+
+            <!--fieldset utilised for categorising request type by using a drop down selection -->
+            <fieldset>
+                <legend><strong>Request Type</strong></legend>
+                <label for="request_type">Select Purpose:</label><br>
+                <select id="request_type" name="request_type" required>
+                    <option value="appointment">Appointment Booking</option>
+                    <option value="quote">Custom Nail/Lash Quote</option>
+                    <option value="group">Bridal / Group Enquiry</option>
+                    <option value="general">General Question</option>
+                </select>
+            </fieldset>
+
+            <br>
+
+            <!-- This fieldset is used for collecting client details -->
+            <fieldset>
+                <legend><strong>Client Details</strong></legend>
+                <p>
+                    <label for="fullname">Full Name:</label><br>
+                    <input type="text" id="fullname" name="fullname" required>
+                </p>
+                <p>
+                    <label for="phone">Phone / WhatsApp Number:</label><br>
+                    <input type="tel" id="phone" name="phone" placeholder="+27..." required>
+                </p>
+                <p>
+                    <label for="email">Email Address:</label><br>
+                    <input type="email" id="email" name="email" required>
+                </p>
+            </fieldset>
+
+            <br>
+
+            <!-- This fieldset is used for collecting appointment preferences -->
+            <fieldset>
+                <legend><strong>Appointment Preferences</strong></legend>
+                <p>
+                    <label for="service">Desired Treatment:</label><br>
+                    <select id="service" name="service">
+                        <option value="acrylic">Short manicure</option>
+                        <option value="acrylic">Medium manicure</option>
+                        <option value="acrylic">Long manicure</option>
+                        <option value="hair">Basic installation</option>
+                        <option value="hair">Customisation (Bleaching knots & plucking)</option>
+                        <option value="lashes">Lash extensions (Strictly cluster)</option>
+                        <option value="hair">Hair Treatment</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="preferred_date">Preferred Date:</label><br>
+                    <input type="date" id="preferred_date" name="preferred_date">
+                </p>
+                <p>
+                    <label for="preferred_time">Preferred Time:</label><br>
+                    <select id="preferred_time" name="preferred_time">
+                        <option value="09:00">09:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="14:00">14:00 PM</option>
+                        <option value="16:00">16:00 PM</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="message">Additional Message / Nail Design Notes:</label><br>
+                    <textarea id="message" name="message" rows="5" cols="40"></textarea>
+                </p>
+            </fieldset>
+
+            <br>
+
+            <!-- Submit and Reset Buttons -->
+            <input type="submit" value="Submit Enquiry">
+            <input type="reset" value="Clear Form">
+        </form>
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>&copy; 2026 Noma's Beautyparlour. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
