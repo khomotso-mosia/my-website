@@ -1,6 +1,6 @@
 # Noma's BeautyParlour - Website Documentation
 
-Welcome to the official web repository for **Noma's BeautyParlour**, a local salon based in Magxaki, Port Elizabeth (Gqeberha). This repository contains the complete responsive multi-page web application built with HTML5 and custom CSS3.
+Welcome to the official web repository for **Noma's BeautyParlour**, a local salon based in Magxaki, Port Elizabeth (Gqeberha). This repository contains the complete responsive multi-page web application built with HTML5 and custom CSS.
 
 ---
 
