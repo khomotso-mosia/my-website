@@ -3,61 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOMA'S BEAUTY PARLOUR |HOME</title>
+    <title>NOMA'S BEAUTY PARLOUR | HOME</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <!--Header Section : This is where you will place your header content ,Brand name,subtitles and main navigation links -->
-    <header>
-    <!--Logo goes here--> 
-    <!--Navigation links for all individual pages-->
-     <div class="header-container">
-    <a href="index.html" class="logo-link">
-      <img src="assets/images/Gemini_Generated_Image_2vccsr2vccsr2vcc.png" alt="Noma's BeautyParlour Logo" class="logo-img">
-    </a>
-    <nav>
-      <a href="./index.html">HOME</a>
-      <a href="./pages/about.html">ABOUT US</a>
-      <a href="./pages/contact.html">CONTACT US</a>
-      <a href="./pages/enquiry.html">ENQUIRY</a>
-      <a href="./pages/services.html">SERVICES</a>
-      
-    </nav>
+  <!-- Header Section -->
+  <header>
+    <div class="header-container">
+        <a href="index.html" class="logo-link">
+            <img src="assets/images/Gemini_Generated_Image_2vccsr2vccsr2vcc.png" alt="Noma's BeautyParlour Logo" class="logo-img">
+        </a>
+        <nav>
+            <a href="./index.html">HOME</a>
+            <a href="./pages/about.html">ABOUT US</a>
+            <a href="./pages/contact.html">CONTACT US</a>
+            <a href="./pages/enquiry.html">ENQUIRY</a>
+            <a href="./pages/services.html">SERVICES</a>
+        </nav>
     </div>
   </header>
-   <!--Main section-->
-  <main>
-    <!--First Section-->
-    <section>
-      <!--Welcome message-->
-      <h1 style="color: rgb(171, 147, 12);text-align:center;">WELCOME TO NOMA'S BEAUTY PARLOUR</h1>
-      <!--Website description paragraph-->
-      <p> Your local go-to spot for total beauty transformations. 
-         Noma's Beauty Parlour brings expert hair installations, creative nail designs, and lash extensions right to your neighborhood.
-         Browse our menu, check out our work, and get in touch with your local beauty tech today!</p>
-      <!--Insert an image-->
-     <!--Moved image to the center by wrapping it in a centered paragraph -->
-<p style="text-align: center;">
-    <img src="./assets/images/home page picture.jpeg" 
-         alt="Main image" 
-         width="500" 
-         style="max-width: 100%; height: auto;">
-</p>
 
+  <!-- Main Section -->
+  <main>
+    <section>
+      <!-- Welcome message -->
+      <h1 style="color: rgb(171, 147, 12); text-align: center;">WELCOME TO NOMA'S BEAUTY PARLOUR</h1>
+      <!-- Website description paragraph -->
+      <p>
+         Your local go-to spot for total beauty transformations. 
+         Noma's Beauty Parlour brings expert hair installations, creative nail designs, and lash extensions right to your neighborhood.
+         Browse our menu, check out our work, and get in touch with your local beauty tech today!
+      </p>
+      
+      <!-- Centered image -->
+      <p style="text-align: center;">
+        <img src="./assets/images/home page picture.jpeg" 
+             alt="Main image" 
+             width="500" 
+             style="max-width: 100%; height: auto;">
+      </p>
     </section>
-    </main>
-    <!--Footer Section-->
-   <footer>
+  </main>
+
+  <!-- Footer Section with Dynamic Timestamp -->
+  <footer>
     <div class="footer-container">
         <p class="footer-slogan">"Transforming Your Look, Elevating Your Confidence."</p>
         <div class="footer-details">
             <p><strong>Location:</strong> Magxaki, Port Elizabeth (Gqeberha)</p>
             <p><strong>Phone:</strong> 081 234 5678 | <strong>Email:</strong> info@nomasbeautyparlour.co.za</p>
             <p><strong>Hours:</strong> Mon - Sat: 08:30 - 17:30</p>
+            <!-- Automatically updating timestamp container -->
+            <p><strong>Page Visited On:</strong> <span id="live-timestamp">Loading time...</span></p>
         </div>
         <p class="footer-copy">&copy; 2026 Noma's BeautyParlour. All Rights Reserved.</p>
     </div>
-</footer>
-  </main>
+  </footer>
+
+  <!-- JavaScript Link (Root level path) -->
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
