@@ -8,120 +8,125 @@
 </head>
 <body>
 
+    <!-- Reusable Header Navigation -->
     <header>
-    <!--Logo goes here--> 
-    <!--Navigation links for all individual pages-->
-     <div class="header-container">
-    <a href="index.html" class="logo-link">
-      <img src="../assets/images/Gemini_Generated_Image_2vccsr2vccsr2vcc.png" alt="Noma's BeautyParlour Logo" class="logo-img">
-    </a>
-    <nav>
-      <a href="../index.html">HOME</a>
-      <a href="about.html">ABOUT US</a>
-      <a href="contact.html">CONTACT US</a>
-      <a href="enquiry.html">ENQUIRY</a>
-      <a href="services.html">SERVICES</a>
-      
-    </nav>
-    </div>
-  </header>
-    <hr>
+        <div class="header-container">
+            <a href="../index.html" class="logo-link">
+                <img src="../assets/images/Gemini_Generated_Image_2vccsr2vccsr2vcc.png" alt="Noma's BeautyParlour Logo" class="logo-img">
+            </a>
+            <nav>
+                <a href="../index.html">HOME</a>
+                <a href="about.html">ABOUT US</a>
+                <a href="contact.html">CONTACT US</a>
+                <a href="enquiry.html">ENQUIRY</a>
+                <a href="services.html">SERVICES</a>
+            </nav>
+        </div>
+    </header>
 
     <main>
-        <h2>Booking & General Enquiry Form</h2>
-        <p>Please fill out the form below to request an appointment or ask a question.</p>
+        <section>
+            <h2 style="text-align: center;">Booking & General Enquiry Form</h2>
+            <p style="text-align: center;">Please fill out the form below to request an appointment or ask a question.</p>
 
-        <!--Collect the user data -->
-        <form action="#" method="post">
+            <!-- Dynamic validation feedback message container -->
+            <p id="form-feedback" style="font-weight: bold; text-align: center; margin-bottom: 1rem;"></p>
 
-            <!--fieldset utilised for categorising request type by using a drop down selection -->
-            <fieldset>
-                <legend><strong>Request Type</strong></legend>
-                <label for="request_type">Select Purpose:</label><br>
-                <select id="request_type" name="request_type" required>
-                    <option value="appointment">Appointment Booking</option>
-                    <option value="quote">Custom Nail/Lash Quote</option>
-                    <option value="group">Bridal / Group Enquiry</option>
-                    <option value="general">General Question</option>
-                </select>
-            </fieldset>
+            <!-- User Data Collection Form -->
+            <form id="contactForm" action="#" method="post">
 
-            <br>
-
-            <!-- This fieldset is used for collecting client details -->
-            <fieldset>
-                <legend><strong>Client Details</strong></legend>
-                <p>
-                    <label for="fullname">Full Name:</label><br>
-                    <input type="text" id="fullname" name="fullname" required>
-                </p>
-                <p>
-                    <label for="phone">Phone / WhatsApp Number:</label><br>
-                    <input type="tel" id="phone" name="phone" placeholder="+27..." required>
-                </p>
-                <p>
-                    <label for="email">Email Address:</label><br>
-                    <input type="email" id="email" name="email" required>
-                </p>
-            </fieldset>
-
-            <br>
-
-            <!-- This fieldset is used for collecting appointment preferences -->
-            <fieldset>
-                <legend><strong>Appointment Preferences</strong></legend>
-                <p>
-                    <label for="service">Desired Treatment:</label><br>
-                    <select id="service" name="service">
-                        <option value="acrylic">Short manicure</option>
-                        <option value="acrylic">Medium manicure</option>
-                        <option value="acrylic">Long manicure</option>
-                        <option value="hair">Basic installation</option>
-                        <option value="hair">Customisation (Bleaching knots & plucking)</option>
-                        <option value="lashes">Lash extensions (Strictly cluster)</option>
-                        <option value="hair">Hair Treatment</option>
+                <!-- Request Type Selection -->
+                <fieldset>
+                    <legend><strong>Request Type</strong></legend>
+                    <label for="request_type">Select Purpose:</label><br>
+                    <select id="request_type" name="request_type" required>
+                        <option value="appointment">Appointment Booking</option>
+                        <option value="quote">Custom Nail/Lash Quote</option>
+                        <option value="group">Bridal / Group Enquiry</option>
+                        <option value="general">General Question</option>
                     </select>
-                </p>
-                <p>
-                    <label for="preferred_date">Preferred Date:</label><br>
-                    <input type="date" id="preferred_date" name="preferred_date">
-                </p>
-                <p>
-                    <label for="preferred_time">Preferred Time:</label><br>
-                    <select id="preferred_time" name="preferred_time">
-                        <option value="09:00">09:00 AM</option>
-                        <option value="11:00">11:00 AM</option>
-                        <option value="14:00">14:00 PM</option>
-                        <option value="16:00">16:00 PM</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="message">Additional Message / Nail Design Notes:</label><br>
-                    <textarea id="message" name="message" rows="5" cols="40"></textarea>
-                </p>
-            </fieldset>
+                </fieldset>
 
-            <br>
+                <br>
 
-            <!-- Submit and Reset Buttons -->
-            <input type="submit" value="Submit Enquiry">
-            <input type="reset" value="Clear Form">
-        </form>
+                <!-- Client Details -->
+                <fieldset>
+                    <legend><strong>Client Details</strong></legend>
+                    <p>
+                        <label for="fullname">Full Name:</label><br>
+                        <input type="text" id="fullname" name="fullname" id="name" placeholder="Enter your full name" required>
+                    </p>
+                    <p>
+                        <label for="phone">Phone / WhatsApp Number:</label><br>
+                        <input type="tel" id="phone" name="phone" placeholder="+27..." required>
+                    </p>
+                    <p>
+                        <label for="email">Email Address:</label><br>
+                        <input type="email" id="email" name="email" placeholder="enter your email" required>
+                    </p>
+                </fieldset>
+
+                <br>
+
+                <!-- Appointment Preferences -->
+                <fieldset>
+                    <legend><strong>Appointment Preferences</strong></legend>
+                    <p>
+                        <label for="service">Desired Treatment:</label><br>
+                        <select id="service" name="service">
+                            <option value="short_manicure">Short manicure</option>
+                            <option value="medium_manicure">Medium manicure</option>
+                            <option value="long_manicure">Long manicure</option>
+                            <option value="hair_basic">Basic installation</option>
+                            <option value="hair_custom">Customisation (Bleaching knots & plucking)</option>
+                            <option value="lashes_cluster">Lash extensions (Strictly cluster)</option>
+                            <option value="hair_treatment">Hair Treatment</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label for="preferred_date">Preferred Date:</label><br>
+                        <input type="date" id="preferred_date" name="preferred_date">
+                    </p>
+                    <p>
+                        <label for="preferred_time">Preferred Time:</label><br>
+                        <select id="preferred_time" name="preferred_time">
+                            <option value="09:00">09:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="14:00">14:00 PM</option>
+                            <option value="16:00">16:00 PM</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label for="message">Additional Message / Nail Design Notes:</label><br>
+                        <textarea id="message" name="message" rows="5" cols="40" placeholder="Enter any extra details or custom requests here..."></textarea>
+                    </p>
+                </fieldset>
+
+                <br>
+
+                <!-- Submit & Clear Buttons -->
+                <button type="submit">Submit Enquiry</button>
+                <input type="reset" value="Clear Form" style="margin-top: 0.5rem; background-color: #666; color: white;">
+            </form>
+        </section>
     </main>
 
-    <hr>
-
+    <!-- Footer Section with Dynamic Timestamp -->
     <footer>
-    <div class="footer-container">
-        <p class="footer-slogan">"Transforming Your Look, Elevating Your Confidence."</p>
-        <div class="footer-details">
-            <p><strong>Location:</strong> Magxaki, Port Elizabeth (Gqeberha)</p>
-            <p><strong>Phone:</strong> 081 234 5678 | <strong>Email:</strong> info@nomasbeautyparlour.co.za</p>
-            <p><strong>Hours:</strong> Mon - Sat: 08:30 - 17:30</p>
+        <div class="footer-container">
+            <p class="footer-slogan">"Transforming Your Look, Elevating Your Confidence."</p>
+            <div class="footer-details">
+                <p><strong>Location:</strong> Magxaki, Port Elizabeth (Gqeberha)</p>
+                <p><strong>Phone:</strong> 081 234 5678 | <strong>Email:</strong> info@nomasbeautyparlour.co.za</p>
+                <p><strong>Hours:</strong> Mon - Sat: 08:30 - 17:30</p>
+                <!-- Automatically updating timestamp container -->
+                <p><strong>Page Visited On:</strong> <span id="live-timestamp">Loading time...</span></p>
+            </div>
+            <p class="footer-copy">&copy; 2026 Noma's BeautyParlour. All Rights Reserved.</p>
         </div>
-        <p class="footer-copy">&copy; 2026 Noma's BeautyParlour. All Rights Reserved.</p>
-    </div>
-</footer>
+    </footer>
 
+    <!-- JavaScript Link -->
+    <script src="../assets/js/script.js"></script>
 </body>
 </html>
