@@ -315,23 +315,22 @@ footer {
 /* --- Visual Pop & Polish Enhancements --- */
 
 /* --- Top Live Timestamp Bar Styling --- */
-.top-info-bar {
-    background-color: #121212 !important;
+/* --- Header Timestamp Styling (Top Right, No Black Bar) --- */
+.header-timestamp {
+    font-size: 0.8rem;
     color: #ab930c;
-    font-size: 0.85rem;
-    padding: 0.5rem 1.5rem;
-    display: flex;
-    justify-content: flex-end; /* Right aligns the timestamp */
-    align-items: center;
-    border-bottom: 1px solid #ab930c;
-    letter-spacing: 0.5px;
-    width: 100%;
-    box-sizing: border-box;
+    font-weight: 500;
+    margin-left: auto;
+    padding-left: 1rem;
+    white-space: nowrap;
 }
 
-.timestamp-display {
-    font-weight: 600;
-    color: #ab930c;
+/* Make sure the header container uses flexbox to space things out nicely */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 /* Smooth Navigation Hover Effects */
 header nav a {
