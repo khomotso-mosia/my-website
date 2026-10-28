@@ -2,15 +2,29 @@
 // Wait for the HTML document to fully load before running scripts
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* ------------------------------------------
-       1. AUTOMATIC LIVE TIMESTAMP IN FOOTER
-       ------------------------------------------ */
-    const timestampElement = document.getElementById("live-timestamp");
-    if (timestampElement) {
-        const now = new Date();
-        // Formats date and time nicely (e.g., 2026/10/28, 12:36:00 PM)
-        timestampElement.textContent = now.toLocaleString();
-    }
+   // Live Timestamp Updater (Updates all elements with the class 'live-timestamp')
+function updateTimestamp() {
+    const now = new Date();
+    const options = { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric', 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit' 
+    };
+    const formattedTime = now.toLocaleDateString('en-ZA', options);
+    
+    // Find all elements with the live-timestamp class and update them
+    const timestampElements = document.querySelectorAll('.live-timestamp');
+    timestampElements.forEach(el => {
+        el.textContent = formattedTime;
+    });
+}
+
+// Run immediately and update every second
+updateTimestamp();
+setInterval(updateTimestamp, 1000);
     /* ------------------------------------------
        2. INTERACTIVE ACCORDION BUTTONS (FAQ / SERVICES)
        ------------------------------------------ */
