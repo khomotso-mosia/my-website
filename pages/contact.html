@@ -70,9 +70,9 @@
         <!-- Enquiry / Contact Form Section -->
         <section>
             <h2 style="text-align: center;">Enquiry Form</h2>
-
-            <!-- Feedback Message Area for JS Form Validation -->
-            <p id="form-feedback" style="font-weight: bold; text-align: center; margin-bottom: 1rem;"></p>
+<!-- Submit & Clear Buttons -->
+        <!-- Feedback message container placed right above buttons so users see it instantly -->
+        
 
             <form id="contactForm" action="#" method="post">
                 <label for="name">Your Name:</label><br/>
@@ -99,6 +99,7 @@
                 <textarea id="message" name="message" rows="6" cols="40" placeholder="Enter your enquiry here..." required></textarea>
                 <br><br>
 
+                <p id="form-feedback" style="font-weight: bold; text-align: center; margin-bottom: 1rem;"></p>
                 <input type="submit" value="Submit Enquiry">
                 <input type="reset" value="Clear">
             </form>
