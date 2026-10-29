@@ -381,3 +381,14 @@ button:hover, .accordion-header:hover, input[type="submit"]:hover {
 #serviceSearch:focus {
     box-shadow: 0 0 10px rgba(171, 147, 12, 0.5);
 }
+/* --- Clickable Image Hover Polish --- */
+.clickable-img, main img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.clickable-img:hover, main img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(171, 147, 12, 0.4);
+    border-color: #ab930c;
+}
