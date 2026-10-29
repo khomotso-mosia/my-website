@@ -14,9 +14,30 @@ updateTimestamp();
 setInterval(updateTimestamp, 1000);
 
 
-// 2. DOM Content Loaded (Forms, Search, Lightbox, Accordions)
+// 2. DOM Content Loaded (Forms, Search, Lightbox, Accordions, Scroll Button)
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Noma's Script Loaded Successfully!");
+
+    // --- Back to Top Button Logic ---
+    const backToTopBtn = document.getElementById("backToTop");
+    if (backToTopBtn) {
+        // Show button when user scrolls down 300px
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
+
+        // Smooth scroll to top when clicked
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    }
 
     // --- FAQ Accordion Functionality ---
     const accordions = document.querySelectorAll(".accordion-header");
@@ -32,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- Form Validation (Red Error Text Under Fields) ---
+    // --- Form Validation (Red Error Text Under Fields + Personalized Greeting) ---
     const contactForm = document.getElementById("contactForm");
     const feedbackMsg = document.getElementById("form-feedback");
 
@@ -94,10 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!isValid) {
                 if (feedbackMsg) {
                     feedbackMsg.style.color = "#ff4d4d";
-                    feedbackMsg.textContent = "⚠️ Please correct the errors highlighted above.";
+                    feedbackMsg.textContent = "⚠️ Please correct the errors highlighted below.";
                 }
             } else {
-                // Success state with personalized name!
+                // Success state with personalized name
                 if (feedbackMsg) {
                     const userName = nameInput ? nameInput.value.trim() : "Valued Customer";
                     feedbackMsg.style.color = "#2ecc71";
