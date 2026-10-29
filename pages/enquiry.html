@@ -36,7 +36,7 @@
 
             
             <!-- User Data Collection Form -->
-            <form id="contactForm" action="#" method="post">
+            <form id="contactForm" action="javascript:void(0);" method="post" novalidate>
 
                 <!-- Request Type Selection -->
                 <fieldset>
@@ -58,14 +58,17 @@
                     <p>
                         <label for="fullname">Full Name:</label><br>
                        <input type="text" id="name" name="fullname" placeholder="Enter your full name" required> 
+                       <span id="name-error" class="field-error" style="color: #ff4d4d; font-size: 0.85rem; display: block; margin-top: 0.2rem;"></span>
                     </p>
                     <p>
                         <label for="phone">Phone / WhatsApp Number:</label><br>
                         <input type="tel" id="phone" name="phone" placeholder="+27..." required>
+                        <span id="phone-error" class="field-error" style="color: #ff4d4d; font-size: 0.85rem; display: block; margin-top: 0.2rem;"></span>
                     </p>
                     <p>
                         <label for="email">Email Address:</label><br>
                         <input type="email" id="email" name="email" placeholder="enter your email" required>
+                        <span id="email-error" class="field-error" style="color: #ff4d4d; font-size: 0.85rem; display: block; margin-top: 0.2rem;"></span>
                     </p>
                 </fieldset>
 
@@ -102,6 +105,7 @@
                     <p>
                         <label for="message">Additional Message / Nail Design Notes:</label><br>
                         <textarea id="message" name="message" rows="5" cols="40" placeholder="Enter any extra details or custom requests here..."></textarea>
+                        <span id="message-error" class="field-error" style="color: #ff4d4d; font-size: 0.85rem; display: block; margin-top: 0.2rem;"></span>
                     </p>
                 </fieldset>
 
