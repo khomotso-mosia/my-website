@@ -67,12 +67,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let isValid = true;
 
-            // Validate Name
+            // Validate Name (Check for empty field AND numbers)
             const nameInput = document.getElementById("name");
             const nameError = document.getElementById("name-error");
-            if (nameInput && nameInput.value.trim() === "") {
-                if (nameError) nameError.textContent = "⚠️ Please enter your name.";
-                isValid = false;
+            if (nameInput) {
+                const nameVal = nameInput.value.trim();
+                if (nameVal === "") {
+                    if (nameError) nameError.textContent = "⚠️ Please enter your name.";
+                    isValid = false;
+                } else if (/[0-9]/.test(nameVal)) {
+                    // Checks if numbers are present in the name field
+                    if (nameError) nameError.textContent = "⚠️ Name cannot contain numbers. Please enter letters only.";
+                    isValid = false;
+                }
             }
 
             // Validate Email
@@ -115,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!isValid) {
                 if (feedbackMsg) {
                     feedbackMsg.style.color = "#ff4d4d";
-                    feedbackMsg.textContent = "⚠️ Please correct the errors highlighted below.";
+                    feedbackMsg.textContent = "⚠️ Please correct the errors highlighted above.";
                 }
             } else {
                 // Success state with personalized name
