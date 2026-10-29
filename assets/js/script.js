@@ -87,3 +87,52 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// --- Custom Image Lightbox Modal ---
+document.addEventListener("DOMContentLoaded", () => {
+    // Create the modal HTML dynamically if it doesn't already exist in the HTML file
+    if (!document.getElementById("imageModal")) {
+        const modalHtml = `
+            <div id="imageModal" class="modal">
+                <span class="modal-close">&times;</span>
+                <img class="modal-content" id="modalImg" alt="Enlarged View">
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+    }
+
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImg");
+    const closeBtn = document.querySelector(".modal-close");
+
+    // Select all images inside main content
+    const images = document.querySelectorAll("main img");
+
+    images.forEach(img => {
+        // Skip iframes or icons
+        if (!img.closest('iframe')) {
+            img.style.cursor = "pointer";
+            
+            img.addEventListener("click", function(e) {
+                e.preventDefault(); // Prevents browser from opening the image file directly
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            });
+        }
+    });
+
+    // Close modal when clicking the 'X', the image itself, or the background
+    const closeModal = () => {
+        modal.style.display = "none";
+    };
+
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    if (modalImg) modalImg.addEventListener("click", closeModal);
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+});
