@@ -316,16 +316,21 @@ footer {
 
 /* --- Top Live Timestamp Bar Styling --- */
 /* --- Header Timestamp Styling (Top Right, No Black Bar) --- */
+/* --- Header Timestamp Styling (Top Right, High Visibility) --- */
 .header-timestamp {
-    font-size: 0.8rem;
-    color: #ab930c;
-    font-weight: 500;
+    font-size: 0.85rem;
+    color: #ffffff !important; /* Crisp white so it stands out immediately */
+    font-weight: 600;
     margin-left: auto;
     padding-left: 1rem;
-    white-space: nowrap;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Adds contrast */
 }
 
-/* Make sure the header container uses flexbox to space things out nicely */
+/* Ensure the live numbers themselves are highlighted in your signature gold */
+.header-timestamp .live-timestamp {
+    color: #ab930c !important;
+}
+
 .header-container {
     display: flex;
     align-items: center;
