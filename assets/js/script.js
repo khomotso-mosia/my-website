@@ -1,19 +1,12 @@
+// --- Consolidated Script for Noma's BeautyParlour ---
 
-// 1. Live Timestamp Updater (Dual Placement: Top Right & Footer)
+// 1. Live Timestamp Updater (Top Right & Footer)
 function updateTimestamp() {
     const now = new Date();
-    const options = { 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric', 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        second: '2-digit' 
-    };
+    const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
     const formattedTime = now.toLocaleDateString('en-ZA', options);
     
-    const timestampElements = document.querySelectorAll('.live-timestamp');
-    timestampElements.forEach(el => {
+    document.querySelectorAll('.live-timestamp').forEach(el => {
         el.textContent = formattedTime;
     });
 }
@@ -21,10 +14,12 @@ updateTimestamp();
 setInterval(updateTimestamp, 1000);
 
 
-// 2. FAQ Accordion Functionality
+// 2. DOM Content Loaded (Forms, Search, Lightbox, Accordions)
 document.addEventListener("DOMContentLoaded", () => {
+    console.log("Noma's Script Loaded Successfully!");
+
+    // --- FAQ Accordion Functionality ---
     const accordions = document.querySelectorAll(".accordion-header");
-    
     accordions.forEach(header => {
         header.addEventListener("click", function() {
             this.classList.toggle("active");
@@ -37,102 +32,124 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Form Validation & Error Message Handling
+    // --- Form Validation (Red Error Text Under Fields) ---
     const contactForm = document.getElementById("contactForm");
     const feedbackMsg = document.getElementById("form-feedback");
 
     if (contactForm) {
         contactForm.addEventListener("submit", function(event) {
-            event.preventDefault(); // Stop page from refreshing
+            event.preventDefault(); // Stop page reload
 
-            const name = document.getElementById("name") ? document.getElementById("name").value.trim() : "";
-            const email = document.getElementById("email") ? document.getElementById("email").value.trim() : "";
-            const message = document.getElementById("message") ? document.getElementById("message").value.trim() : "";
+            // Clear previous errors safely
+            document.querySelectorAll(".field-error").forEach(el => el.textContent = "");
+            if (feedbackMsg) feedbackMsg.textContent = "";
 
-            // Check for missing required fields
-            if (!name || !email || !message) {
-                feedbackMsg.style.color = "#ff4d4d"; // Error Red
-                feedbackMsg.textContent = "⚠️ Please fill in all required fields (Name, Email, Message) before submitting.";
-                return;
+            let isValid = true;
+
+            // Validate Name
+            const nameInput = document.getElementById("name");
+            const nameError = document.getElementById("name-error");
+            if (nameInput && nameInput.value.trim() === "") {
+                if (nameError) nameError.textContent = "⚠️ Please enter your name.";
+                isValid = false;
             }
 
-            // Simple email structure verification
-            if (!email.includes("@") || !email.includes(".")) {
-                feedbackMsg.style.color = "#ff4d4d";
-                feedbackMsg.textContent = "⚠️ Please enter a valid email address.";
-                return;
+            // Validate Email
+            const emailInput = document.getElementById("email");
+            const emailError = document.getElementById("email-error");
+            if (emailInput) {
+                const emailVal = emailInput.value.trim();
+                if (emailVal === "") {
+                    if (emailError) emailError.textContent = "⚠️ Please enter your email address.";
+                    isValid = false;
+                } else if (!emailVal.includes("@") || !emailVal.includes(".")) {
+                    if (emailError) emailError.textContent = "⚠️ Please enter a valid email address.";
+                    isValid = false;
+                }
             }
 
-            // Success state (Displays in Green right above the submit button)
-            feedbackMsg.style.color = "#2ecc71"; // Success Green
-            feedbackMsg.textContent = "✨ Thank you, " + name + "! Your enquiry/booking has been successfully sent. We will contact you soon.";
-            contactForm.reset();
+            // Validate Phone (Check for letters)
+            const phoneInput = document.getElementById("phone");
+            const phoneError = document.getElementById("phone-error");
+            if (phoneInput) {
+                const phoneVal = phoneInput.value.trim();
+                if (phoneVal === "") {
+                    if (phoneError) phoneError.textContent = "⚠️ Please enter your phone number.";
+                    isValid = false;
+                } else if (/[a-zA-Z]/.test(phoneVal)) {
+                    if (phoneError) phoneError.textContent = "⚠️ Phone number cannot contain letters. Please use digits only.";
+                    isValid = false;
+                }
+            }
+
+            // Validate Message
+            const messageInput = document.getElementById("message");
+            const messageError = document.getElementById("message-error");
+            if (messageInput && messageInput.value.trim() === "") {
+                if (messageError) messageError.textContent = "⚠️ Please enter your message.";
+                isValid = false;
+            }
+
+            // Final Result
+            if (!isValid) {
+                if (feedbackMsg) {
+                    feedbackMsg.style.color = "#ff4d4d";
+                    feedbackMsg.textContent = "⚠️ Please correct the errors highlighted above.";
+                }
+            } else {
+                // Success state with personalized name!
+                if (feedbackMsg) {
+                    const userName = nameInput ? nameInput.value.trim() : "Valued Customer";
+                    feedbackMsg.style.color = "#2ecc71";
+                    feedbackMsg.textContent = "✨ Thank you, " + userName + "! Your enquiry/booking has been successfully sent. We will contact you soon.";
+                }
+                contactForm.reset();
+            }
         });
     }
-    // 4. Live Services Search Bar Filter
+
+    // --- Services Search Bar ---
     const searchInput = document.getElementById("serviceSearch");
     if (searchInput) {
         searchInput.addEventListener("keyup", function() {
             const filter = searchInput.value.toLowerCase();
-            const serviceRows = document.querySelectorAll("tbody tr");
-
-            serviceRows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                if (text.includes(filter)) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
+            document.querySelectorAll("tbody tr").forEach(row => {
+                row.style.display = row.textContent.toLowerCase().includes(filter) ? "" : "none";
             });
         });
     }
-});
 
-// --- Custom Image Lightbox Modal ---
-document.addEventListener("DOMContentLoaded", () => {
-    // Create the modal HTML dynamically if it doesn't already exist in the HTML file
+    // --- Image Lightbox Modal ---
     if (!document.getElementById("imageModal")) {
-        const modalHtml = `
+        document.body.insertAdjacentHTML('beforeend', `
             <div id="imageModal" class="modal">
                 <span class="modal-close">&times;</span>
                 <img class="modal-content" id="modalImg" alt="Enlarged View">
             </div>
-        `;
-        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        `);
     }
 
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImg");
     const closeBtn = document.querySelector(".modal-close");
 
-    // Select all images inside main content
-    const images = document.querySelectorAll("main img");
-
-    images.forEach(img => {
-        // Skip iframes or icons
+    document.querySelectorAll("main img").forEach(img => {
         if (!img.closest('iframe')) {
             img.style.cursor = "pointer";
-            
             img.addEventListener("click", function(e) {
-                e.preventDefault(); // Prevents browser from opening the image file directly
+                e.preventDefault();
                 modal.style.display = "block";
                 modalImg.src = this.src;
             });
         }
     });
 
-    // Close modal when clicking the 'X', the image itself, or the background
-    const closeModal = () => {
-        modal.style.display = "none";
-    };
-
+    const closeModal = () => modal.style.display = "none";
     if (closeBtn) closeBtn.addEventListener("click", closeModal);
     if (modalImg) modalImg.addEventListener("click", closeModal);
     if (modal) {
         modal.addEventListener("click", (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
+            if (e.target === modal) closeModal();
         });
     }
 });
