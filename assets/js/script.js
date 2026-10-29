@@ -37,17 +37,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 3. Form Validation & Error Message Handling
+    // Form Validation & Error Message Handling
     const contactForm = document.getElementById("contactForm");
     const feedbackMsg = document.getElementById("form-feedback");
 
     if (contactForm) {
         contactForm.addEventListener("submit", function(event) {
-            event.preventDefault(); // Stop page reload
+            event.preventDefault(); // Stop page from refreshing
 
             const name = document.getElementById("name") ? document.getElementById("name").value.trim() : "";
             const email = document.getElementById("email") ? document.getElementById("email").value.trim() : "";
-            const phone = document.getElementById("phone") ? document.getElementById("phone").value.trim() : "";
             const message = document.getElementById("message") ? document.getElementById("message").value.trim() : "";
 
             // Check for missing required fields
@@ -64,13 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Success state
+            // Success state (Displays in Green right above the submit button)
             feedbackMsg.style.color = "#2ecc71"; // Success Green
             feedbackMsg.textContent = "✨ Thank you, " + name + "! Your enquiry/booking has been successfully sent. We will contact you soon.";
             contactForm.reset();
         });
     }
-
     // 4. Live Services Search Bar Filter
     const searchInput = document.getElementById("serviceSearch");
     if (searchInput) {
