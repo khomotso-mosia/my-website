@@ -368,3 +368,16 @@ button:hover, .accordion-header:hover, input[type="submit"]:hover {
     background-color: #ab930c !important;
     color: #121212 !important;
 }
+/* --- Services Search Bar Styling --- */
+#serviceSearch {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid #ab930c;
+    font-size: 0.95rem;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+}
+
+#serviceSearch:focus {
+    box-shadow: 0 0 10px rgba(171, 147, 12, 0.5);
+}
