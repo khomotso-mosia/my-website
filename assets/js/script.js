@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!isValid) {
                 if (feedbackMsg) {
                     feedbackMsg.style.color = "#ff4d4d";
-                    feedbackMsg.textContent = " Please correct the errors highlighted below.";
+                    feedbackMsg.textContent = " Please correct the errors highlighted above.";
                 }
             } else {
                 // Check if this is the Contact form or the Booking form
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (isContactPage) {
                         feedbackMsg.textContent = " Thank you, " + nameVal + "! Launching your email application to send your enquiry...";
                     } else {
-                        feedbackMsg.textContent = "✨ Thank you, " + nameVal + "! Your booking request has been submitted successfully.";
+                        feedbackMsg.textContent = " Thank you, " + nameVal + "! Your booking/enquiry request has been submitted successfully.";
                     }
                     
                     // Automatically clear the success message after 2 minutes (120,000 ms)
