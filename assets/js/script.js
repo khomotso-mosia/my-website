@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Back to Top Button Logic ---
     const backToTopBtn = document.getElementById("backToTop");
     if (backToTopBtn) {
-        // Show button when user scrolls down 300px
         window.addEventListener("scroll", () => {
             if (window.scrollY > 300) {
                 backToTopBtn.style.display = "block";
@@ -30,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Smooth scroll to top when clicked
         backToTopBtn.addEventListener("click", () => {
             window.scrollTo({
                 top: 0,
@@ -53,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- Form Validation & Mailto Trigger ---
     // --- Dynamic Validation & Direct Email Client Trigger ---
     const contactForm = document.getElementById("contactForm");
     const feedbackMsg = document.getElementById("form-feedback");
@@ -136,14 +133,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (feedbackMsg) {
                     feedbackMsg.style.color = "#2ecc71";
                     feedbackMsg.textContent = " Thank you, " + nameVal + "! Launching your email application to send your enquiry...";
-                // Automatically clear the success message after 5 seconds
+                    
+                    // Automatically clear the success message after 2 minutes (120,000 ms)
                     setTimeout(() => {
                         feedbackMsg.textContent = "";
-                    }, 5000);
+                    }, 120000);
                 }
 
                 // Construct Email Body and Subject
-                const recipientEmail = "info@nomasbeautyparlour.co.za"; // Replace with your salon's email
+                const recipientEmail = "info@nomasbeautyparlour.co.za";
                 const subject = encodeURIComponent("New Salon Enquiry from " + nameVal);
                 const body = encodeURIComponent(
                     "Name: " + nameVal + "\n" +
@@ -171,12 +169,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- Image Lightbox Modal ---
+    // --- Image Lightbox Modal with Next/Prev Support ---
     if (!document.getElementById("imageModal")) {
         document.body.insertAdjacentHTML('beforeend', `
-            <div id="imageModal" class="modal">
+            <div id="imageModal" class="modal" style="display: none;">
                 <span class="modal-close">&times;</span>
+                <span class="modal-nav modal-prev" id="modalPrev">&#10094;</span>
                 <img class="modal-content" id="modalImg" alt="Enlarged View">
+                <span class="modal-nav modal-next" id="modalNext">&#10095;</span>
             </div>
         `);
     }
@@ -184,21 +184,60 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImg");
     const closeBtn = document.querySelector(".modal-close");
+    const prevBtn = document.getElementById("modalPrev");
+    const nextBtn = document.getElementById("modalNext");
 
-    document.querySelectorAll("main img").forEach(img => {
-        if (!img.closest('iframe')) {
-            img.style.cursor = "pointer";
-            img.addEventListener("click", function(e) {
-                e.preventDefault();
-                modal.style.display = "block";
-                modalImg.src = this.src;
-            });
+    // Collect all zoomable page images into an array
+    const pageImages = Array.from(document.querySelectorAll("main img")).filter(img => !img.closest('iframe'));
+    let currentImageIndex = 0;
+
+    function showImage(index) {
+        if (pageImages.length === 0) return;
+        if (index < 0) index = pageImages.length - 1; // Wrap around to end
+        if (index >= pageImages.length) index = 0;   // Wrap around to start
+        currentImageIndex = index;
+        modalImg.src = pageImages[currentImageIndex].src;
+    }
+
+    pageImages.forEach((img, index) => {
+        img.style.cursor = "pointer";
+        img.addEventListener("click", function(e) {
+            e.preventDefault();
+            modal.style.display = "block";
+            showImage(index);
+        });
+    });
+
+    // Next / Previous Click Listeners
+    if (prevBtn) {
+        prevBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            showImage(currentImageIndex - 1);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            showImage(currentImageIndex + 1);
+        });
+    }
+
+    // Keyboard Arrow Key Navigation
+    document.addEventListener("keydown", (e) => {
+        if (modal && modal.style.display === "block") {
+            if (e.key === "ArrowLeft") {
+                showImage(currentImageIndex - 1);
+            } else if (e.key === "ArrowRight") {
+                showImage(currentImageIndex + 1);
+            } else if (e.key === "Escape") {
+                modal.style.display = "none";
+            }
         }
     });
 
-    const closeModal = () => modal.style.display = "none";
+    const closeModal = () => { if (modal) modal.style.display = "none"; };
     if (closeBtn) closeBtn.addEventListener("click", closeModal);
-    if (modalImg) modalImg.addEventListener("click", closeModal);
     if (modal) {
         modal.addEventListener("click", (e) => {
             if (e.target === modal) closeModal();
