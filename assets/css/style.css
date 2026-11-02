@@ -396,26 +396,24 @@ button:hover, .accordion-header:hover, input[type="submit"]:hover {
 /* --- Custom Image Modal Styling --- */
 .modal {
     display: none; 
-    position: fixed;
-    z-index: 9999;
-    padding-top: 50px;
+    position: fixed; 
+    z-index: 999; 
+    padding-top: 100px; 
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(18, 18, 18, 0.9); /* Faded dark luxury backdrop */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.9); 
 }
 
+/* Add this wrapper style or make sure content container is relative */
 .modal-content {
     margin: auto;
     display: block;
-    max-width: 85%;
-    max-height: 85vh;
-    border-radius: 6px;
-    border: 2px solid #ab930c;
-    box-shadow: 0 0 20px rgba(171, 147, 12, 0.4);
-    cursor: pointer;
+    max-width: 80%;
+    max-height: 80vh;
+    position: relative; /* Crucial for internal absolute positioning */
 }
 
 .modal-close {
@@ -457,4 +455,34 @@ button:hover, .accordion-header:hover, input[type="submit"]:hover {
     color: #ffffff;
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(171, 147, 12, 0.4);
+}
+
+/* --- Lightbox Modal Navigation Buttons --- */
+.modal-nav {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 16px;
+    color: #ab930c; /* Gold accent to match your luxury theme */
+    font-weight: bold;
+    font-size: 2.5rem;
+    transition: 0.3s ease;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    z-index: 1000; /* Ensures they sit on top of the image */
+}
+
+.modal-nav:hover {
+    background-color: #ab930c;
+    color: #ffffff;
+}
+
+.modal-prev {
+    left: 30px; /* Positioned on the left side of the screen */
+}
+
+.modal-next {
+    right: 30px; /* Positioned on the right side of the screen */
 }
