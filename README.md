@@ -32,6 +32,8 @@ Semantic HTML5 forms for booking enquiries and user feedback
 
 5. **Client-Side Form Validation & Error Handling**:
    * Custom JavaScript validation (`novalidate`) replacing default browser popups.
+   * **Contact Page**: Validates inputs real-time and safely triggers native `mailto:` links to open the user's default email client (e.g., Outlook).
+  * **Booking / Enquiry Page**: Performs full client-side validation, displays an on-screen confirmation message (clears after 120s), and resets fields without launching external mail clients.
    * Field-specific red warning messages displayed dynamically underneath each input (`#name`, `#email`, `#phone`, `#message`).
    * Intelligent checks preventing numbers in name fields and letters in telephone number fields.
    * Personalized success greeting banner ("*Thank you, [Name]! Your enquiry has been successfully sent...*").
@@ -42,11 +44,13 @@ Semantic HTML5 forms for booking enquiries and user feedback
 7. **Image Lightbox Modal**:
    * Clicking any product or service image instantly opens a custom dark luxury overlay modal on the page, avoiding unwanted page navigation or raw file redirects.
    * Closeable via an explicit "X" button, clicking the image itself, or clicking anywhere on the backdrop.
+   * Touch-enabled modal popup supporting keyboard controls (`Left Arrow`, `Right Arrow`, `Escape`) and visual directional navigation (`❮` / `❯`).
 
 8. **Dynamic User Enhancements**:
    * **Live Timestamp Header**: Real-time localized date and time display updated every second.
    * **FAQ Accordions**: Smooth collapsible dropdown panels for frequently asked questions.
    * **Back-to-Top Button**: Floating gold button that appears when scrolling down and smoothly returns the user to the top of the page.
+   * **SVG Social Media Channels**: High-resolution, zero-dependency SVG links for Facebook and WhatsApp embedded directly into the standardized global footer.
 
 ---
 ## File & Folder Structure
@@ -67,7 +71,7 @@ nomas-beauty-parlour/
 │   │   └── style.css           # Global luxury theme, modal, and error styles
 │   ├── js/
 │   │   └── script.js           # Consolidated JavaScript functionality
-│   └── images/                 # Optimized salon imagery and pricelists
+│   └── images/                 # Optimized salon imagery and pricelists 
 │
 └── README.md                   # Project documentation and changelog
 
@@ -89,6 +93,15 @@ Font Awesome
 
 Google Fonts
 - for typography styling
+
+Frontend 
+- Vanilla HTML5, CSS3, JavaScript (ES6+)
+
+Icons
+- Standalone inline vector SVGs (zero external CSS file dependencies)
+
+Design Pattern
+- Dark Luxury Minimalist Design System
 
 ## Usage Instructions
 
@@ -138,6 +151,14 @@ v1.2.0 - Advanced Interactivity & JavaScript Features (2026-11-03)
     Added dynamic user enhancements including collapsible FAQ accordions, a live timestamp, and a smooth-scroll "Back to Top" button.
 
     Consolidated all script event listeners to prevent execution conflicts 
+
+    Added standalone SVG icons for WhatsApp and Facebook into the global footer.
+
+   Separated submission handling: Contact form opens `mailto:`, while Booking form retains clean on-screen confirmation only.
+
+   Fixed modal display bugs and added `@media (hover: none)` touch rules for seamless mobile navigation.
+
+   Standardized global footer and live time displays across all pages.
 
 ---
 
