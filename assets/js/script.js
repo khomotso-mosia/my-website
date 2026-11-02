@@ -53,31 +53,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- Form Validation (Red Error Text Under Fields + Personalized Greeting) ---
+    // --- Form Validation & Mailto Trigger ---
     const contactForm = document.getElementById("contactForm");
     const feedbackMsg = document.getElementById("form-feedback");
 
     if (contactForm) {
         contactForm.addEventListener("submit", function(event) {
-            event.preventDefault(); // Stop page reload
-
             // Clear previous errors safely
             document.querySelectorAll(".field-error").forEach(el => el.textContent = "");
             if (feedbackMsg) feedbackMsg.textContent = "";
 
             let isValid = true;
 
-            // Validate Name (Check for empty field AND numbers)
+            // Validate Name
             const nameInput = document.getElementById("name");
             const nameError = document.getElementById("name-error");
             if (nameInput) {
                 const nameVal = nameInput.value.trim();
                 if (nameVal === "") {
-                    if (nameError) nameError.textContent = "⚠️ Please enter your name.";
+                    if (nameError) nameError.textContent = " Please enter your name.";
                     isValid = false;
                 } else if (/[0-9]/.test(nameVal)) {
-                    // Checks if numbers are present in the name field
-                    if (nameError) nameError.textContent = "⚠️ Name cannot contain numbers. Please enter letters only.";
+                    if (nameError) nameError.textContent = " Name cannot contain numbers. Please enter letters only.";
                     isValid = false;
                 }
             }
@@ -88,24 +85,24 @@ document.addEventListener("DOMContentLoaded", () => {
             if (emailInput) {
                 const emailVal = emailInput.value.trim();
                 if (emailVal === "") {
-                    if (emailError) emailError.textContent = "⚠️ Please enter your email address.";
+                    if (emailError) emailError.textContent = " Please enter your email address.";
                     isValid = false;
                 } else if (!emailVal.includes("@") || !emailVal.includes(".")) {
-                    if (emailError) emailError.textContent = "⚠️ Please enter a valid email address.";
+                    if (emailError) emailError.textContent = " Please enter a valid email address.";
                     isValid = false;
                 }
             }
 
-            // Validate Phone (Check for letters)
+            // Validate Phone
             const phoneInput = document.getElementById("phone");
             const phoneError = document.getElementById("phone-error");
             if (phoneInput) {
                 const phoneVal = phoneInput.value.trim();
                 if (phoneVal === "") {
-                    if (phoneError) phoneError.textContent = "⚠️ Please enter your phone number.";
+                    if (phoneError) phoneError.textContent = " Please enter your phone number.";
                     isValid = false;
                 } else if (/[a-zA-Z]/.test(phoneVal)) {
-                    if (phoneError) phoneError.textContent = "⚠️ Phone number cannot contain letters. Please use digits only.";
+                    if (phoneError) phoneError.textContent = " Phone number cannot contain letters. Please use digits only.";
                     isValid = false;
                 }
             }
@@ -114,24 +111,25 @@ document.addEventListener("DOMContentLoaded", () => {
             const messageInput = document.getElementById("message");
             const messageError = document.getElementById("message-error");
             if (messageInput && messageInput.value.trim() === "") {
-                if (messageError) messageError.textContent = "⚠️ Please enter your message.";
+                if (messageError) messageError.textContent = " Please enter your message.";
                 isValid = false;
             }
 
-            // Final Result
+            // If validation fails, STOP submission
             if (!isValid) {
+                event.preventDefault(); // Stop form from submitting
                 if (feedbackMsg) {
                     feedbackMsg.style.color = "#ff4d4d";
-                    feedbackMsg.textContent = "⚠️ Please correct the errors highlighted above.";
+                    feedbackMsg.textContent = " Please correct the errors highlighted below.";
                 }
             } else {
-                // Success state with personalized name
+                // If valid, allow it to open their mail client naturally!
                 if (feedbackMsg) {
                     const userName = nameInput ? nameInput.value.trim() : "Valued Customer";
                     feedbackMsg.style.color = "#2ecc71";
-                    feedbackMsg.textContent = "✨ Thank you, " + userName + "! Your enquiry/booking has been successfully sent. We will contact you soon.";
+                    feedbackMsg.textContent = "Thank you, " + userName + "! Opening your email client to send your enquiry...";
                 }
-                contactForm.reset();
+                // NOTE: We do NOT call event.preventDefault() here, so the mailto action triggers successfully!
             }
         });
     }
