@@ -486,3 +486,10 @@ button:hover, .accordion-header:hover, input[type="submit"]:hover {
 .modal-next {
     right: 30px; /* Positioned on the right side of the screen */
 }
+
+/* --- Social Media Icon Hover Effects --- */
+.social-links a:hover {
+    color: #ab930c !important;
+    transform: scale(1.1);
+    display: inline-block;
+}
