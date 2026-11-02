@@ -50,13 +50,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
-    // --- Dynamic Validation & Direct Email Client Trigger ---
+// --- Dynamic Validation & Form Handling (Contact vs Booking) ---
     const contactForm = document.getElementById("contactForm");
+    const bookingForm = document.getElementById("bookingForm"); // For booking/enquiry page
+    const activeForm = contactForm || bookingForm;
     const feedbackMsg = document.getElementById("form-feedback");
 
-    if (contactForm) {
-        contactForm.addEventListener("submit", function(event) {
+    if (activeForm) {
+        activeForm.addEventListener("submit", function(event) {
             event.preventDefault(); // Always prevent default page jump/reload
 
             // 1. Clear previous errors safely
@@ -66,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let isValid = true;
 
             // 2. Validate Name
-            const nameInput = document.getElementById("name");
+            const nameInput = document.getElementById("name") || document.getElementById("booking-name");
             const nameError = document.getElementById("name-error");
             let nameVal = "";
             if (nameInput) {
@@ -129,10 +130,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     feedbackMsg.textContent = " Please correct the errors highlighted below.";
                 }
             } else {
+                // Check if this is the Contact form or the Booking form
+                const isContactPage = activeForm.id === "contactForm";
+
                 // Personalized Green Success Message
                 if (feedbackMsg) {
                     feedbackMsg.style.color = "#2ecc71";
-                    feedbackMsg.textContent = " Thank you, " + nameVal + "! Launching your email application to send your enquiry...";
+                    if (isContactPage) {
+                        feedbackMsg.textContent = " Thank you, " + nameVal + "! Launching your email application to send your enquiry...";
+                    } else {
+                        feedbackMsg.textContent = "✨ Thank you, " + nameVal + "! Your booking request has been submitted successfully.";
+                    }
                     
                     // Automatically clear the success message after 2 minutes (120,000 ms)
                     setTimeout(() => {
@@ -140,20 +148,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     }, 120000);
                 }
 
-                // Construct Email Body and Subject
-                const recipientEmail = "info@nomasbeautyparlour.co.za";
-                const subject = encodeURIComponent("New Salon Enquiry from " + nameVal);
-                const body = encodeURIComponent(
-                    "Name: " + nameVal + "\n" +
-                    "Email: " + emailVal + "\n" +
-                    "Phone: " + phoneVal + "\n\n" +
-                    "Message/Enquiry:\n" + messageVal
-                );
+                // ONLY launch email client if it's the contact page form
+                if (isContactPage) {
+                    const recipientEmail = "info@nomasbeautyparlour.co.za";
+                    const subject = encodeURIComponent("New Salon Enquiry from " + nameVal);
+                    const body = encodeURIComponent(
+                        "Name: " + nameVal + "\n" +
+                        "Email: " + emailVal + "\n" +
+                        "Phone: " + phoneVal + "\n\n" +
+                        "Message/Enquiry:\n" + messageVal
+                    );
 
-                // Trigger opening the default user mail application safely
-                window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+                    window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+                }
 
-                contactForm.reset();
+                activeForm.reset();
             }
         });
     }
