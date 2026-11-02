@@ -271,7 +271,7 @@ footer {
     }
 }
 /* ==========================================
-   7. ACCORDION COMPONENT STYLING (PART 3)
+   7. ACCORDION COMPONENT STYLING 
    ========================================== */
 .accordion-container {
     margin: 1.5rem 0;
@@ -312,10 +312,10 @@ footer {
     padding: 1rem 0;
     margin: 0;
 }
-/* --- Visual Pop & Polish Enhancements --- */
+/* ========================================== */
+/* 8.VISUAL POP & POLISH ENHANCEMENTS            */
+/* ========================================== */
 
-/* --- Top Live Timestamp Bar Styling --- */
-/* --- Header Timestamp Styling (Top Right, No Black Bar) --- */
 /* --- Header Timestamp Styling (Top Right, High Visibility) --- */
 .header-timestamp {
     font-size: 0.85rem;
@@ -326,7 +326,7 @@ footer {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Adds contrast */
 }
 
-/* Ensure the live numbers themselves are highlighted in your signature gold */
+/* Ensure the live numbers themselves are highlighted in signature gold */
 .header-timestamp .live-timestamp {
     color: #ab930c !important;
 }
@@ -407,7 +407,7 @@ button:hover, .accordion-header:hover, input[type="submit"]:hover {
     background-color: rgba(0,0,0,0.9); 
 }
 
-/* Add this wrapper style or make sure content container is relative */
+/*  wrapper style or make sure content container is relative */
 .modal-content {
     margin: auto;
     display: block;
@@ -464,7 +464,7 @@ button:hover, .accordion-header:hover, input[type="submit"]:hover {
     top: 50%;
     transform: translateY(-50%);
     padding: 16px;
-    color: #ab930c; /* Gold accent to match your luxury theme */
+    color: #ab930c; /* Gold accent to match luxury theme */
     font-weight: bold;
     font-size: 2.5rem;
     transition: 0.3s ease;

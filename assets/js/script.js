@@ -1,11 +1,13 @@
-// --- Consolidated Script for Noma's BeautyParlour ---
-
-// 1. Live Timestamp Updater (Top Right & Footer)
+// ==========================================
+// 1. LIVE TIMESTAMP UPDATER (Top Right & Footer)
+// ==========================================
 function updateTimestamp() {
     const now = new Date();
+    // Configure formatting options using South African locale (en-ZA)
     const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
     const formattedTime = now.toLocaleDateString('en-ZA', options);
     
+    // Update all elements with the .live-timestamp class across the site
     document.querySelectorAll('.live-timestamp').forEach(el => {
         el.textContent = formattedTime;
     });
@@ -14,13 +16,16 @@ updateTimestamp();
 setInterval(updateTimestamp, 1000);
 
 
-// 2. DOM Content Loaded (Forms, Search, Lightbox, Accordions, Scroll Button)
+// ==========================================
+// 2. DOM CONTENT LOADED (Main Interactive Engine)
+// ==========================================
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Noma's Script Loaded Successfully!");
 
     // --- Back to Top Button Logic ---
     const backToTopBtn = document.getElementById("backToTop");
     if (backToTopBtn) {
+        // Show button only when user scrolls down more than 300px
         window.addEventListener("scroll", () => {
             if (window.scrollY > 300) {
                 backToTopBtn.style.display = "block";
@@ -29,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+        // Smooth scroll back to top of the page on click
         backToTopBtn.addEventListener("click", () => {
             window.scrollTo({
                 top: 0,
@@ -43,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         header.addEventListener("click", function() {
             this.classList.toggle("active");
             const panel = this.nextElementSibling;
+            // Expand or collapse accordion panel smoothly
             if (panel.style.maxHeight) {
                 panel.style.maxHeight = null;
             } else {
@@ -66,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let isValid = true;
 
-            // 2. Validate Name
+            // 2. Validate Name input (Letters onlyno numbers allowed)
             const nameInput = document.getElementById("name") || document.getElementById("booking-name");
             const nameError = document.getElementById("name-error");
             let nameVal = "";
@@ -81,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
-            // 3. Validate Email
+            // 3. Validate Email input(Must contain '@' and '.' for basic validation)
             const emailInput = document.getElementById("email");
             const emailError = document.getElementById("email-error");
             let emailVal = "";
@@ -96,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
-            // 4. Validate Phone
+            // 4. Validate Phone input (Digits only, no letters allowed)
             const phoneInput = document.getElementById("phone");
             const phoneError = document.getElementById("phone-error");
             let phoneVal = "";
@@ -111,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
-            // 5. Validate Message
+            // 5. Validate Message input (Required for Contact form, optional for Booking form)
             const messageInput = document.getElementById("message");
             const messageError = document.getElementById("message-error");
             let messageVal = "";
