@@ -54,22 +54,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // --- Form Validation & Mailto Trigger ---
+    // --- Dynamic Validation & Direct Email Client Trigger ---
     const contactForm = document.getElementById("contactForm");
     const feedbackMsg = document.getElementById("form-feedback");
 
     if (contactForm) {
         contactForm.addEventListener("submit", function(event) {
-            // Clear previous errors safely
+            event.preventDefault(); // Always prevent default page jump/reload
+
+            // 1. Clear previous errors safely
             document.querySelectorAll(".field-error").forEach(el => el.textContent = "");
             if (feedbackMsg) feedbackMsg.textContent = "";
 
             let isValid = true;
 
-            // Validate Name
+            // 2. Validate Name
             const nameInput = document.getElementById("name");
             const nameError = document.getElementById("name-error");
+            let nameVal = "";
             if (nameInput) {
-                const nameVal = nameInput.value.trim();
+                nameVal = nameInput.value.trim();
                 if (nameVal === "") {
                     if (nameError) nameError.textContent = " Please enter your name.";
                     isValid = false;
@@ -79,11 +83,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
-            // Validate Email
+            // 3. Validate Email
             const emailInput = document.getElementById("email");
             const emailError = document.getElementById("email-error");
+            let emailVal = "";
             if (emailInput) {
-                const emailVal = emailInput.value.trim();
+                emailVal = emailInput.value.trim();
                 if (emailVal === "") {
                     if (emailError) emailError.textContent = " Please enter your email address.";
                     isValid = false;
@@ -93,11 +98,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
-            // Validate Phone
+            // 4. Validate Phone
             const phoneInput = document.getElementById("phone");
             const phoneError = document.getElementById("phone-error");
+            let phoneVal = "";
             if (phoneInput) {
-                const phoneVal = phoneInput.value.trim();
+                phoneVal = phoneInput.value.trim();
                 if (phoneVal === "") {
                     if (phoneError) phoneError.textContent = " Please enter your phone number.";
                     isValid = false;
@@ -107,29 +113,49 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
-            // Validate Message
+            // 5. Validate Message
             const messageInput = document.getElementById("message");
             const messageError = document.getElementById("message-error");
-            if (messageInput && messageInput.value.trim() === "") {
-                if (messageError) messageError.textContent = " Please enter your message.";
-                isValid = false;
+            let messageVal = "";
+            if (messageInput) {
+                messageVal = messageInput.value.trim();
+                if (messageVal === "") {
+                    if (messageError) messageError.textContent = " Please enter your message.";
+                    isValid = false;
+                }
             }
 
-            // If validation fails, STOP submission
+            // 6. Output Evaluation
             if (!isValid) {
-                event.preventDefault(); // Stop form from submitting
                 if (feedbackMsg) {
                     feedbackMsg.style.color = "#ff4d4d";
                     feedbackMsg.textContent = " Please correct the errors highlighted below.";
                 }
             } else {
-                // If valid, allow it to open their mail client naturally!
+                // Personalized Green Success Message
                 if (feedbackMsg) {
-                    const userName = nameInput ? nameInput.value.trim() : "Valued Customer";
                     feedbackMsg.style.color = "#2ecc71";
-                    feedbackMsg.textContent = "Thank you, " + userName + "! Opening your email client to send your enquiry...";
+                    feedbackMsg.textContent = " Thank you, " + nameVal + "! Launching your email application to send your enquiry...";
+                // Automatically clear the success message after 5 seconds
+                    setTimeout(() => {
+                        feedbackMsg.textContent = "";
+                    }, 5000);
                 }
-                // NOTE: We do NOT call event.preventDefault() here, so the mailto action triggers successfully!
+
+                // Construct Email Body and Subject
+                const recipientEmail = "info@nomasbeautyparlour.co.za"; // Replace with your salon's email
+                const subject = encodeURIComponent("New Salon Enquiry from " + nameVal);
+                const body = encodeURIComponent(
+                    "Name: " + nameVal + "\n" +
+                    "Email: " + emailVal + "\n" +
+                    "Phone: " + phoneVal + "\n\n" +
+                    "Message/Enquiry:\n" + messageVal
+                );
+
+                // Trigger opening the default user mail application safely
+                window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+
+                contactForm.reset();
             }
         });
     }
